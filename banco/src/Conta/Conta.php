@@ -1,10 +1,10 @@
 <?php
 namespace Banco\Conta;
 
-class Conta
+abstract class Conta
 {
     private $titular;
-    private $saldo;
+    protected $saldo;
     private static $numeroDeContas = 0;
 
     public function __construct(Titular $titular)
@@ -20,10 +20,7 @@ class Conta
         self::$numeroDeContas--;
     }
 
-    protected function percentualTarifa():float
-    {
-        return 0.05;
-    }
+    abstract protected function percentualTarifa():float;
 
     public function sacar(float $valorASacar): void
     {
@@ -46,17 +43,6 @@ class Conta
         }
 
         $this->saldo += $valorADepositar;
-    }
-
-    public function transfere(float $valorATransferir, Conta $contaDestino): void
-    {
-        if ($valorATransferir > $this->saldo) {
-            echo "Saldo indisponível";
-            return;
-        }
-
-        $this->sacar($valorATransferir);
-        $contaDestino->depositar($valorATransferir);
     }
 
     public function recuperaSaldo(): float

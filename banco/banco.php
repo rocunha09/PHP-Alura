@@ -8,11 +8,12 @@ use Banco\Modelo\CPF;
 use Banco\Conta\Conta;
 use Banco\Modelo\Funcionario;
 use Banco\Conta\ContaPoupanca;
+use Banco\Conta\ContaCorrente;
 
 
 $endereco = new Endereco('Rio de Janeiro', 'Centro', 'avenida Presidente Vargas', '233');
 $vinicius = new Titular(new CPF('123.456.789-10'), 'Vinicius Dias', $endereco);
-$primeiraConta = new Conta($vinicius);
+$primeiraConta = new ContaCorrente($vinicius);
 $primeiraConta->depositar(500);
 $primeiraConta->sacar(300); // isso é ok
 
@@ -21,12 +22,12 @@ echo $primeiraConta->recuperaCpfTitular() . PHP_EOL;
 echo $primeiraConta->recuperaSaldo() . PHP_EOL;
 
 $patricia = new Titular(new CPF('698.549.548-10'), 'Patricia', $endereco);
-$segundaConta = new Conta($patricia);
+$segundaConta = new ContaCorrente($patricia);
 print_r($primeiraConta);
 print_r($segundaConta);
 
 $outroEndereco = new Endereco('a', 'b', 'c', '1D');
-$outra = new Conta(new Titular(new CPF('123.654.789-01'), 'Abcdefg', $outroEndereco));
+$outra = new ContaCorrente(new Titular(new CPF('123.654.789-01'), 'Abcdefg', $outroEndereco));
 print_r($outra);
 unset($segundaConta);
 echo Conta::recuperaNumeroDeContas();
@@ -44,7 +45,7 @@ print_r($cpfFunc);
 $titu = new Titular($cpf, 'João', $end);
 print_r($titu);
 
-$cc = new Conta($titu);
+$cc = new ContaCorrente($titu);
 print_r($cc);
 
 $cp = new ContaPoupanca($titu);
