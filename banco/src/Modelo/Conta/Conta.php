@@ -1,5 +1,7 @@
 <?php
-namespace Banco\Conta;
+namespace Banco\Modelo\Conta;
+
+use Banco\Modelo\Conta\Titular;
 
 abstract class Conta
 {

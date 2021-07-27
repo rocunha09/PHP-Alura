@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Banco\Conta;
+namespace Banco\Modelo\Conta;
 
 
 class ContaCorrente extends Conta
