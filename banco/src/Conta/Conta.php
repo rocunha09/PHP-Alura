@@ -1,4 +1,5 @@
 <?php
+namespace Banco\Conta;
 
 class Conta
 {
@@ -19,17 +20,25 @@ class Conta
         self::$numeroDeContas--;
     }
 
-    public function saca(float $valorASacar): void
+    protected function percentualTarifa():float
     {
-        if ($valorASacar > $this->saldo) {
+        return 0.05;
+    }
+
+    public function sacar(float $valorASacar): void
+    {
+        $tarifaSaque = $valorASacar * $this->percentualTarifa();
+        $valorSaque  = $valorASacar + $tarifaSaque;
+
+        if ($valorSaque > $this->saldo) {
             echo "Saldo indisponível";
             return;
         }
 
-        $this->saldo -= $valorASacar;
+        $this->saldo -= $valorSaque;
     }
 
-    public function deposita(float $valorADepositar): void
+    public function depositar(float $valorADepositar): void
     {
         if ($valorADepositar < 0) {
             echo "Valor precisa ser positivo";
@@ -69,4 +78,5 @@ class Conta
     {
         return self::$numeroDeContas;
     }
+
 }

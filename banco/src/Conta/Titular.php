@@ -1,4 +1,8 @@
 <?php
+namespace Banco\Conta;
+use Banco\Modelo\Pessoa;
+use Banco\Modelo\CPF;
+use Banco\Modelo\Endereco;
 
 class Titular extends Pessoa
 {
@@ -16,3 +20,4 @@ class Titular extends Pessoa
         return $this->endereco;
     }
 }
+

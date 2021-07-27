@@ -1,5 +1,5 @@
 <?php
-
+namespace Banco\Modelo;
 
 class Endereco
 {
