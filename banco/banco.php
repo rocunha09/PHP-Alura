@@ -83,3 +83,11 @@ echo 'total de bonificacoes: ' . $controladorBonificacao->recuperarTotal() . PHP
 $auth->tentarLogar($diretor, '1230'); //1234
 $auth->tentarLogar($gerente, '4320'); //4321
 $auth->tentarLogar($vinicius, '2020'); //2021
+
+echo $end . PHP_EOL; //toString implementado
+echo $end->rua . PHP_EOL;;
+
+$end->__set('RUA', 'Estrada do Monteiro'); //utilizado strtolower para tratar letras maiúsculas
+echo $end->rua . PHP_EOL;;
+
+echo $dev->nome; //apesar da IDE estar sinalizado o código é funcional, e o PHP o reconhece...

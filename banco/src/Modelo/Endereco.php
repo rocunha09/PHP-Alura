@@ -1,8 +1,19 @@
 <?php
 namespace Banco\Modelo;
 
-class Endereco
+use Banco\Modelo\Funcionario\AcessoPropriedades;
+
+/**
+ * Class Endereco
+ * @package Banco\Modelo
+ * @property-read string $cidade
+ * @property-read string $bairro
+ * @property-read string $rua
+ * @property-read string $numero
+ */
+final class Endereco
 {
+        use AcessoPropriedades;  //usando Trait para fazer reuso de metodos mágicos __get e __set
         private $cidade;
         private $bairro;
         private $rua;
@@ -36,6 +47,9 @@ class Endereco
         return $this->numero;
     }
 
-
+    public function __toString()
+    {
+        return "{$this->rua}, {$this->numero}, {$this->bairro}, {$this->cidade}";
+    }
 
 }

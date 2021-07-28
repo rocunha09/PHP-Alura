@@ -6,6 +6,7 @@ use Banco\Modelo\CPF;
 
 abstract class Funcionario extends Pessoa
 {
+    use AcessoPropriedades;  //usando Trait para fazer reuso de metodos mágicos __get e __set
     private $salario;
 
     public function __construct(string $nome, CPF $cpf, float $salario)
