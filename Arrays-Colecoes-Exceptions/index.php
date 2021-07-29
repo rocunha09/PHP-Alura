@@ -8,11 +8,11 @@ $notaDeHistória = 5;
 $notaDeQuimica = 10;
 $media = ($notaDePortuguês + $notaDeMatematica + $notaDeGeografia + $notaDeHistória + $notaDeQuimica)/5;
 
-echo "A nota de português é: $notaDePortuguês <br>";
-echo "A nota de Matematica é: $notaDeMatematica <br>";
-echo "A nota de Geografia é: $notaDeGeografia <br>";
-echo "A nota de História é: $notaDeHistória <br>";
-echo "A nota de História é: $notaDeQuimica <br><br>";
+echo "A nota de português é: $notaDePortuguês " . PHP_EOL;
+echo "A nota de Matematica é: $notaDeMatematica " . PHP_EOL;
+echo "A nota de Geografia é: $notaDeGeografia " . PHP_EOL;
+echo "A nota de História é: $notaDeHistória " . PHP_EOL;
+echo "A nota de História é: $notaDeQuimica " . PHP_EOL;
 
 echo "A média é: $media";
 */
@@ -27,11 +27,11 @@ $notaDeHistória = $notas[3];
 $notaDeQuimica = $notas[4];
 $media = ($notas[0] + $notas[1] + $notas[2] + $notas[3] + $notas[4])/count($notas);
 
-echo "A nota de português é: $notas[0] <br>";
-echo "A nota de Matematica é: $notas[1] <br>";
-echo "A nota de Geografia é: $notas[2] <br>";
-echo "A nota de História é: $notas[3] <br>";
-echo "A nota de História é: $notas[4] <br><br>";
+echo "A nota de português é: $notas[0] " . PHP_EOL;
+echo "A nota de Matematica é: $notas[1] " . PHP_EOL;
+echo "A nota de Geografia é: $notas[2] " . PHP_EOL;
+echo "A nota de História é: $notas[3] " . PHP_EOL;
+echo "A nota de História é: $notas[4] " . PHP_EOL;
 
 echo "A média é: $media";
 */
@@ -54,11 +54,11 @@ for ($i = 0; $i < $quantidadeDeNotas; $i++){
 
 $media = $soma/$quantidadeDeNotas;
 
-echo "A nota de português é: $notas[0] <br>";
-echo "A nota de Matematica é: $notas[1] <br>";
-echo "A nota de Geografia é: $notas[2] <br>";
-echo "A nota de História é: $notas[3] <br>";
-echo "A nota de História é: $notas[4] <br><br>";
+echo "A nota de português é: $notas[0] " . PHP_EOL;
+echo "A nota de Matematica é: $notas[1] " . PHP_EOL;
+echo "A nota de Geografia é: $notas[2] " . PHP_EOL;
+echo "A nota de História é: $notas[3] " . PHP_EOL;
+echo "A nota de História é: $notas[4] " . PHP_EOL;
 
 echo "A média é: $media";
 */
@@ -78,7 +78,7 @@ for ($i = 0; $i < $quantidadeDeNotas; $i++){
 $media = $soma/$quantidadeDeNotas;
 
 for ($i = 0; $i < $quantidadeDeNotas; $i++){
-    echo "A nota de $materias[$i] é: $notas[$i] <br>";
+    echo "A nota de $materias[$i] é: $notas[$i] " . PHP_EOL;
 
 }
 
@@ -99,7 +99,7 @@ if (!$media){
 
 } else {
     for ($i = 0; $i < $quantidadeDeNotas; $i++){
-        echo "A nota de $materias[$i] é: $notas[$i] <br>";
+        echo "A nota de $materias[$i] é: $notas[$i] " . PHP_EOL;
 
     }
 
