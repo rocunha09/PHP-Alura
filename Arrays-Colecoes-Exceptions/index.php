@@ -1,4 +1,6 @@
 <?php
+require_once 'src/autoload.php';
+use Arrays\Service\Calculadora;
 //lista de notas de matérias, lançando manualmente cada nota, e calculandoa  média.
 /*
 $notaDePortuguês = 9;
@@ -84,7 +86,6 @@ for ($i = 0; $i < $quantidadeDeNotas; $i++){
 
 echo "A média é: $media";*/
 
-require_once 'Calculadora.php';
 $calculadora = new Calculadora();
 
 $materias = ['Português', 'Matemática', 'geografia', 'História', 'Química'];

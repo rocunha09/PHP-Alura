@@ -1,4 +1,6 @@
 <?php
+
+
 //iterando arrays
 $saldos = [
   2500,
