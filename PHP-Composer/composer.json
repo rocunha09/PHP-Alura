@@ -1,0 +1,12 @@
+{
+    "name": "rocunha09/buscador-cursos",
+    "description": "Buscador de cursos do site da Alura.",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Rafael Cunha",
+            "email": "teste@gmail.com"
+        }
+    ],
+    "require": {}
+}
