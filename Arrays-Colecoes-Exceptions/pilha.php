@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 function funcao1()
 {
@@ -29,16 +29,27 @@ function funcao1()
     */
 
     //podemos ter mais de um catch para o tratamento, ou realizar o multi catch que é quando colocamos em um único bloco separando-os por um Pipe
-    // multicatch ficaria assim: }catch (RuntimeException | DivisionByZeroError $problema){}
-    
+    //multicatch ficaria assim: }catch (RuntimeException | DivisionByZeroError $problema){}
+    //podemos também simplesmente lançar de forma genérica chamando apenas por Exception ou error, e também aplicar multiCatch neste caso
+    //ou melhor ainda, podemos chamar direto atraves da base de deste tratamento padrão que é o Throwable
     try{
         funcao2();
 
-    }catch(RuntimeException $problema){
-        echo "erro na função 2, tratado..." .PHP_EOL;        
-    }catch(DivisionByZeroError $problema){
-        echo "erro na função 2, tratado..." .PHP_EOL;        
+    }catch(Throwable $problema){
+        echo $problema->getMessage().PHP_EOL;
+        echo $problema->getLine().PHP_EOL;
+        echo $problema->getTraceAsString().PHP_EOL;
+
+
+
+        //echo "erro na função 2, tratado..." .PHP_EOL;
+        //echo "erro na função 2, tratado..." .PHP_EOL;  //teste 2
     }
+    //}catch(DivisionByZeroError $problema){
+
+        //podemos lançar uma exceção personalizada mesmo dentro de uma que ja estava sendo executada.
+        //throw new RuntimeException('Exceção foi tratada, mas, pega aí...');
+    //}
 
     echo 'Saindo da função 1' . PHP_EOL;
 }
@@ -48,13 +59,18 @@ function funcao2()
     
     echo 'Entrei na função 2' . PHP_EOL;
 
+        /*
+        $exception = new RuntimeException();
+        throw $exception; //lançando uma exceção, mas sem especificar nada
+        */
 
-        $arrayFixo = new splFixedArray(2);
-        $arrayFixo[3] = 'Valor';
-        $divisao = intdiv(5, 0); //isto gera um error que será tratado no catch da função 1
-    
-    
-        for ($i = 1; $i <= 5; $i++) {
+    $divisao = intdiv(5, 0); //teste 2: Isto gera um error que será tratado no catch da função 1
+    $arrayFixo = new splFixedArray(2);
+    $arrayFixo[3] = 'Valor';
+
+
+
+    for ($i = 1; $i <= 5; $i++) {
         echo $i . PHP_EOL;
     }
     //var_dump(debug_backtrace()); //visualizando a pilha de execução para debug
