@@ -2,10 +2,7 @@
 
 namespace PHPComposer\BuscadorDeCursos;
 
-use GuzzleHttp\Client;
-use Symfony\Component\DomCrawler\Crawler;
-
-class Buscador 
+class Buscador
 {
     private $httpClient;
     private $crawler;
@@ -17,7 +14,7 @@ class Buscador
     }
 
 
-    public function buscar(string $url):array
+    public function buscar(string $url): array
     {
         $resposta = $this->httpClient->request('GET', $url);
         $html = $resposta->getBody();
@@ -26,8 +23,8 @@ class Buscador
 
         $dadosDosCursos = $this->crawler->filter('span.card-curso__nome');
         $cursos = array();
-        
-        foreach ($dadosDosCursos as $dado){
+
+        foreach ($dadosDosCursos as $dado) {
             $cursos[] = $dado->textContent;
         }
 
