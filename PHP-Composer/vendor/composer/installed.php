@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '09cb81b2daea53a97b1f04f8cbf8298c72c40cd1',
+        'reference' => '7d6149621594ee62f16edfdca07e3d8054831fbb',
         'name' => 'rocunha09/buscador-cursos',
         'dev' => true,
     ),
@@ -283,7 +283,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '09cb81b2daea53a97b1f04f8cbf8298c72c40cd1',
+            'reference' => '7d6149621594ee62f16edfdca07e3d8054831fbb',
             'dev_requirement' => false,
         ),
         'sabre/event' => array(
