@@ -22,7 +22,7 @@ $statement = $pdo->query('SELECT * FROM students;');
  * obs2.: caso seja preciso apenas 1 dado por exemplo, não seria necesário faazer um fetch
  * ou um fetchAll, bastaria realizarmos um fetchClumn e assim ocupando a memória com menos dados
  * do que antes.
- * 
+ *
  */
 /*
 while($studentData = $statement->fetch(PDO::FETCH_ASSOC)){
