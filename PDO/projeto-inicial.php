@@ -1,14 +1,15 @@
 <?php
 
-use Alura\Pdo\Domain\Model\Student;
+use Alura\Pdo\Infrastructure\persistence\ConnectionCreator;
+use Alura\Pdo\Infrastructure\Repository\PdoStudentRepository;
 
 require_once 'vendor/autoload.php';
 
-$student = new Student(
-    null,
-    'Vinicius Dias',
-    new \DateTimeImmutable('1997-10-15')
-);
 
-echo $student->age().PHP_EOL;
+$pdo = ConnectionCreator::createConnection(); 
 
+$repository = new PdoStudentRepository($pdo); //injeção de dependência para deixar PdoStudentRepository mais independente
+
+$list = $repository->allStudents();
+
+print_r($list);
