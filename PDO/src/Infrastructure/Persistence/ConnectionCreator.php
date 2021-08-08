@@ -13,6 +13,10 @@ class ConnectionCreator
             'sqlite:'.$dbPath
         );
 
+        //com errmode_exception setado, se houver algum erro de conexão, query, ou algo semelhate
+        //o PDO irá monitorar e retornar.
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
         return $pdo;
     }
 }
