@@ -66,6 +66,40 @@ class PdoStudentRepository implements StudentRepository
         return $this->hydrateStudentList($statement);
     }
 
+    public function studentsWithPhones(): array
+    {
+        $sqlJoin = 'SELECT students.id,
+                           students.name,
+                           students.birthdate,
+                           phones.id AS phone_id,
+                           phones.area_code,
+                           phones.number
+                           FROM students
+                           JOIN phones
+                           ON students.id = phones.student_id;';
+        
+        $statement = $this->connection->query($sqlJoin);
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $studentList = [];
+
+        //tratando o retorno para não haver repetição
+        //se o aluno não existir na lista, inclua ele na lista, depois inclua o telegone...
+        //se ja existir o aluno na lista, apenas inclua o telefone...
+        foreach($result as $row){
+            if(!array_key_exists($row['id'], $studentList)){
+                $studentList[$row['id']] = new Student(
+                    $row['id'],
+                    $row['name'],
+                    new DateTimeImmutable($row['birthdate'])
+                );
+            }
+            $phone = new Phone($row['phone_id'], $row['area_code'], $row['number']);
+            $studentList[$row['id']]->addPhone($phone);
+        }
+
+        return $studentList;
+    }
+
     public function studentsBirthAt(\DateTimeInterface $birthdate): array
     {
         $sqlBirthAt= 'SELECT * FROM students WHERE birthdate = ?;';
@@ -89,40 +123,16 @@ class PdoStudentRepository implements StudentRepository
         $studentList = [];
 
         foreach($studentDataList as $studentData){
-            $student = new Student(
+            $studentList[] = new Student(
                 $studentData['id'],
                 $studentData['name'],
                 new DateTimeImmutable($studentData['birthdate'])
 
             );
 
-            $this->fillPhonesOf($student);
-
-            $studentList[] = $student;
         }
 
         return $studentList;
-    }
-
-    private function fillPhonesOf($student): void
-    {
-        $sqlPhones = 'SELECT id, area_code, number FROM phones WHERE student_id = ?';
-        $statement = $this->connection->prepare($sqlPhones);
-        $statement->bindvalue(1, $student->id(), PDO::PARAM_INT);
-        $statement->execute();
-
-        $phoneDataList = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-        foreach ($phoneDataList as $phoneData) {
-            $phone = new Phone(
-                $phoneData['id'],
-                $phoneData['area_code'],
-                $phoneData['number']
-            );
-
-            $student->addPhone($phone);
-        }
-        
     }
 
     public function save(Student $student): bool

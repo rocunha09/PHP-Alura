@@ -14,9 +14,8 @@ $repository = new PdoStudentRepository($pdo); //injeção de dependência para d
 //$list = $repository->allStudents();
 //print_r($list);
 
-$student = $repository->studentIdAt(2);
-
-print_r($student);
+$listWithPhone = $repository->studentsWithPhones();
+print_r($listWithPhone);
 
 
 

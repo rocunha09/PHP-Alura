@@ -6,6 +6,7 @@ use Alura\Pdo\Domain\Model\Student;
 interface StudentRepository
 {
     public function allStudents(): array;
+    public function studentsWithPhones(): array;
     public function studentsBirthAt(\DateTimeInterface $birthDate): array;
     public function studentIdAt(int $id): Array;
     public function save(Student $student): bool;
