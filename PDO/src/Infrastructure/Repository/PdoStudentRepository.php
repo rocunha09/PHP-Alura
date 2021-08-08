@@ -3,10 +3,10 @@
 namespace Alura\Pdo\Infrastructure\Repository;
 
 use Alura\Pdo\Domain\Repository\StudentRepository;
-use Alura\Pdo\Infrastructure\persistence\ConnectionCreator;
 use PDO;
 use Alura\Pdo\Domain\Model\Student;
 use DateTimeImmutable;
+use Alura\Pdo\Domain\Model\Phone;
 
 class PdoStudentRepository implements StudentRepository
 {
@@ -19,7 +19,7 @@ class PdoStudentRepository implements StudentRepository
 
     public function allStudents(): array
     {
-        $sqlAll = 'SELECT * FROM students;';
+        $sqlAll = 'SELECT * FROM students';
         $statement = $this->connection->query($sqlAll);
 
         /*
@@ -89,15 +89,40 @@ class PdoStudentRepository implements StudentRepository
         $studentList = [];
 
         foreach($studentDataList as $studentData){
-            $studentList[] = new Student(
+            $student = new Student(
                 $studentData['id'],
                 $studentData['name'],
                 new DateTimeImmutable($studentData['birthdate'])
 
             );
+
+            $this->fillPhonesOf($student);
+
+            $studentList[] = $student;
         }
 
         return $studentList;
+    }
+
+    private function fillPhonesOf($student): void
+    {
+        $sqlPhones = 'SELECT id, area_code, number FROM phones WHERE student_id = ?';
+        $statement = $this->connection->prepare($sqlPhones);
+        $statement->bindvalue(1, $student->id(), PDO::PARAM_INT);
+        $statement->execute();
+
+        $phoneDataList = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($phoneDataList as $phoneData) {
+            $phone = new Phone(
+                $phoneData['id'],
+                $phoneData['area_code'],
+                $phoneData['number']
+            );
+
+            $student->addPhone($phone);
+        }
+        
     }
 
     public function save(Student $student): bool
@@ -183,13 +208,11 @@ class PdoStudentRepository implements StudentRepository
     {
         $sqlIdAt = 'SELECT * FROM students WHERE id = ?;';
 
-        $statement = $this->connection->prepare($$sqlIdAt);
+        $statement = $this->connection->prepare($sqlIdAt);
         $statement->bindValue(1, $id, PDO::PARAM_INT);
         $statement->execute();
 
-        $studetnDataList = $statement->fetch(PDO::FETCH_ASSOC);
-
-        return $studetnDataList;
+        return $this->hydrateStudentList($statement);
     }
 
 }
