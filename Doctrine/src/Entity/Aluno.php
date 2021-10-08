@@ -22,8 +22,11 @@ class Aluno
      * @Column(type="string")
      */
     private $nome;
+
+    //o padrão da busca do doctrine é lazy, mas pode-se usar eager na notação de fetch para otimizar a buscar e sempre trazer tudo
+    //desta forma reduz a quantidade de select no banco melhorando a performace
     /**
-     * @OneToMany(targetEntity="Telefone", mappedBy="aluno", cascade={"remove", "persist"})
+     * @OneToMany(targetEntity="Telefone", mappedBy="aluno", cascade={"remove", "persist"}, fetch="EAGER")
      */
     private $telefones;
 
@@ -73,7 +76,8 @@ class Aluno
         }
 
         $this->cursos->add($curso);
-        $this->addAluno($this);
+        $curso->addAlunos($this);
+        return $this;
     }
 
     public function getCursos(): Collection
