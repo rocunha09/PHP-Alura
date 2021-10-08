@@ -17,8 +17,8 @@ $alunoRepository = $entityManager->getRepository(Aluno::class);
 */
 
 //buscando aluno pelo seu Id
-$aluno = $alunoRepository->find(4);
-//echo "{$aluno->getId()} - {$aluno->getNome()}\n";
+$aluno = $alunoRepository->find(16);
+echo "ID:{$aluno->getId()} \nNOME:{$aluno->getNome()}\n";
 
 //buscando através de um valor específico.
 //usando findby ele retorna uma lista de ocorrências, mas para apenas 1 registro pode-se usar findoneBy
@@ -31,4 +31,6 @@ $aluno = $alunoRepository->findBy([
 $aluno = $alunoRepository->findOneBy([
     "nome" => "Bill Gates"
 ]);
-print_r($aluno);
+
+
+
