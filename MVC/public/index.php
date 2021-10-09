@@ -1,4 +1,6 @@
 <?php
+//este arquivo no ponto atual de desenvolvimento pode ser chamado de front controller ou dispacher
+//ver: https://i.stack.imgur.com/Beh3a.png
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use Alura\Cursos\Controller\FormularioInsercao;
