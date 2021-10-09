@@ -6,8 +6,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 
+//na notação de entidade foi incluso repositoryClass, para referenciar para o doctrine
+//que ele deve usar a classe AlunoRepository como referência (ver relatorio-cursos-por-aluno-repository.php)
 /**
- * @Entity
+ * @Entity(repositoryClass="Alura\Doctrine\Repository\AlunoRepository")
  */
 class Aluno
 {
