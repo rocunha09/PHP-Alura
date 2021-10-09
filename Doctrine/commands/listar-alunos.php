@@ -24,9 +24,9 @@ $alunos = $alunosRepository->findAll();
 $dql = "SELECT aluno FROM Alura\\Doctrine\\Entity\\Aluno aluno";
 
 //pode-se ainda realizar consultas mais específicas:
-$dqlSufixo = " WHERE aluno.id = 1 OR aluno.nome = 'Rafael Cunha'";
+//$dqlSufixo = " WHERE aluno.id = 1 OR aluno.nome = 'Rafael Cunha'";
 
-$query =  $entityManager->createQuery($dql . $dqlSufixo);
+$query =  $entityManager->createQuery($dql /* . $dqlSufixo*/);
 $alunos = $query->getResult();
 
 foreach ($alunos as $aluno) {

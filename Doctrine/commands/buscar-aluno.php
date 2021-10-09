@@ -16,8 +16,9 @@ $alunoRepository = $entityManager->getRepository(Aluno::class);
 *podemos através do entity manager passar a classe como parâmetro do find [ver o script: atualizar-aluno.php]
 */
 
+$id = $argv[1];
 //buscando aluno pelo seu Id
-$aluno = $alunoRepository->find(16);
+$aluno = $alunoRepository->find($id);
 echo "ID:{$aluno->getId()} \nNOME:{$aluno->getNome()}\n";
 
 //buscando através de um valor específico.
