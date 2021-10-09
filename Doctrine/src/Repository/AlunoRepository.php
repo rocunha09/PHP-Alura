@@ -21,4 +21,16 @@ class AlunoRepository extends EntityRepository
         return $query->getResult();
     }
 
+    public function buscarCursosPorAlunoQueryBuilder()
+    {
+        $query = $this->createQueryBuilder('aluno')
+            ->join('aluno.telefones', 't')
+            ->join('aluno.cursos', 'c')
+            ->addSelect('t')
+            ->addSelect('c')
+            ->getQuery();
+
+        return $query->getResult();
+    }
+
 }

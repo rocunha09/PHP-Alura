@@ -16,7 +16,12 @@ $alunosRepository = $entityManager->getRepository(Aluno::class);
 $debugStack = new DebugStack();
 $entityManager->getConfiguration()->setSQLLogger($debugStack);
 
-$listaAlunos = $alunosRepository->buscarCursosPorAluno();
+//usando dql
+//$listaAlunos = $alunosRepository->buscarCursosPorAluno();
+
+//usando queryBuilder
+$listaAlunos = $alunosRepository->buscarCursosPorAlunoQueryBuilder();
+
 
 //primeira forma de realizar a busca e listar todos alunos com cursos e telefones
 echo "\n\tID:\tNOME:\t\t\tCURSOS:\t\t\tTELEFONES:";
