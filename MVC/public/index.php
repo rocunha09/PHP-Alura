@@ -1,38 +1,20 @@
 <?php
-//este arquivo no ponto atual de desenvolvimento pode ser chamado de front controller ou dispacher
-//ver: https://i.stack.imgur.com/Beh3a.png
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use Alura\Cursos\Controller\FormularioInsercao;
-use Alura\Cursos\Controller\ListarCursos;
-use Alura\Cursos\Controller\Persistencia;
+use Alura\Cursos\Controller\InterfaceControladorRequisicao;
 
+$rotas = require __DIR__ . '/../config/routes.php';
+$caminho = $_SERVER["PATH_INFO"] ?? '/';
 
-if(!empty($_SERVER["PATH_INFO"])){
-   
-    switch ($_SERVER["PATH_INFO"]) {
-        case '/listar-cursos':
-            $controller = new ListarCursos();
-            $controller->processaRequisicao();
-            break;
-    
-        case '/novo-curso':
-            $controller = new FormularioInsercao();
-            $controller->processaRequisicao();
-            break;
-
-        case '/salvar-curso':
-            $controller = new Persistencia();
-            $controller->processaRequisicao();
-            break;
-        
-        default:
-            echo "<h1>404 - page Not Found</h1>";
-            break;
-    }
-
-} else {
-    echo "<h1>404 - page Not Found</h1>";
+//para o script se não receber uma rota válida
+if(!array_key_exists($caminho, $rotas)){
+    //aqui pode-se ter uma página personalizada 404, com um controllador próprio e view
+    //usando http para uma reposta padrão de 404
+    http_response_code(404);
+    exit();
 }
 
-
+//caso receba uma rota válida:
+$controllerClass = $rotas[$caminho];
+$controller = new $controllerClass();
+$controller->processaRequisicao();
