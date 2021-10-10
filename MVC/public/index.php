@@ -5,6 +5,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 use Alura\Cursos\Controller\FormularioInsercao;
 use Alura\Cursos\Controller\ListarCursos;
+use Alura\Cursos\Controller\Persistencia;
 
 
 if(!empty($_SERVER["PATH_INFO"])){
@@ -17,6 +18,11 @@ if(!empty($_SERVER["PATH_INFO"])){
     
         case '/novo-curso':
             $controller = new FormularioInsercao();
+            $controller->processaRequisicao();
+            break;
+
+        case '/salvar-curso':
+            $controller = new Persistencia();
             $controller->processaRequisicao();
             break;
         
