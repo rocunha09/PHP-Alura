@@ -33,4 +33,13 @@ class Exclusao implements InterfaceControladorRequisicao
         header('Location: /listar-cursos', true, 302);
 
     }
+
+
+    /*
+        a aplicação pode falhar devido ao doctrine tentar cirar classes auxiliares para realizar a função
+        de exclusão na aplicação, ocorrerá um erro de proxy
+        para resolver basta rodar:
+        vendor/bin/doctrine.bat  orm:generate-proxies
+    
+    */
 }
