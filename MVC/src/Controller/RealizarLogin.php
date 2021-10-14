@@ -35,6 +35,9 @@ class RealizarLogin implements InterfaceControladorRequisicao
                 echo "E-mail ou senha Inválidos";
                 return;
             }
+            
+            session_start();
+            $_SESSION['logado'] = true;
 
             header('Location: /listar-cursos', true, 302);
 

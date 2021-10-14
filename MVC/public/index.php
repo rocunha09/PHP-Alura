@@ -14,6 +14,16 @@ if(!array_key_exists($caminho, $rotas)){
     exit();
 }
 
+//qualquer controlador irá lidar com a sessão iniciada.
+session_start();
+
+//redireciona caso não esteja logado ou se a rota que esta tentando acessar é diferente de login
+if(!isset($_SESSION['logado']) && stripos($caminho, 'login') === false){
+    header('Location: /login');
+    exit();
+}
+
+
 //caso receba uma rota válida:
 $controllerClass = $rotas[$caminho];
 $controller = new $controllerClass();
