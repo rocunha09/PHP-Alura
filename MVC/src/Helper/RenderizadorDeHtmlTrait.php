@@ -1,10 +1,12 @@
 <?php
 
-namespace Alura\Cursos\Controller;
 
-abstract class ControllerComHtml
+namespace Alura\Cursos\Helper;
+
+
+trait RenderizadorDeHtmlTrait
 {
-    public function renderizaHtml(string $caminhoTemplate, array $dados): string
+    public function renderizaHtml(string $caminhoTemplate, array $dados) :string
     {
         //extraindo as variáveis do array de dados.
         extract($dados);
@@ -14,7 +16,7 @@ abstract class ControllerComHtml
         //será realizado um echo nesta string.
         ob_start();
         require __DIR__ . '/../../view/' . $caminhoTemplate;
-        
+
         //pega o conteúdo e limpa o buffer de uma vez
         $html = ob_get_clean();
 
