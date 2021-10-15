@@ -28,3 +28,4 @@ if(!isset($_SESSION['logado']) && stripos($caminho, 'login') === false){
 $controllerClass = $rotas[$caminho];
 $controller = new $controllerClass();
 $controller->processaRequisicao();
+

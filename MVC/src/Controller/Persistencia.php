@@ -35,11 +35,15 @@ class Persistencia implements InterfaceControladorRequisicao
             //o Doctrine passa a enxergá-lo como se ele tivesse sido buscado do banco. Logo, as alterações 
             //nele poderão ser enviadas para o banco.
             $this->entityManager->merge($curso);
+
+            $_SESSION['mensagem'] = 'Curso atualizado com sucesso!';
             
         } else {
             //inserir
             $this->entityManager->persist($curso);
+            $_SESSION['mensagem'] = 'Curso cadastrado com sucesso!';
         }
+        $_SESSION['tipoMensagem'] = 'success';
 
         $this->entityManager->flush();
 

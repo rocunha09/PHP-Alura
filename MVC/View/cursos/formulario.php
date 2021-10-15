@@ -1,6 +1,5 @@
 <?php include __DIR__ . '/../inicio-html.php'; ?>
 
-<a href="/listar-cursos" class="btn btn-primary mb-2">Voltar</a>
 <form action="/salvar-curso<?=isset($curso) ? '?id='. $curso->getid() : '';?>" method="post">
     <div class="form-group">
         <label for="descricao">Descrição</label>

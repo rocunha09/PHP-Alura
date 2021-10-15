@@ -1,6 +1,16 @@
 <?php include __DIR__ . '/../inicio-html.php'; ?>
 
-    <a href="/novo-curso" class="btn btn-primary mb-2">Novo Curso</a>
+    <?php if(isset($_SESSION['mensagem'])) { ?>
+
+        <div class="alert alert-<?= $_SESSION['tipoMensagem']; ?>">
+            <?= $_SESSION['mensagem']; ?>
+        </div>
+
+    <?php
+            unset($_SESSION['tipoMensagem']);
+            unset($_SESSION['mensagem']);
+        }
+    ?>
     <ul class="list-group">
         <?php foreach ($cursos as $curso): ?>
             <li class="list-group-item d-flex justify-content-between align-items-center">

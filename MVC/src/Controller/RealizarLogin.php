@@ -25,14 +25,18 @@ class RealizarLogin implements InterfaceControladorRequisicao
         $senha = filter_input(INPUT_POST, 'senha', FILTER_SANITIZE_STRING);
 
         if(is_null($email) || $email === false){
-            echo "Email Inválido";
+            $_SESSION['tipoMensagem'] = 'danger';
+            $_SESSION['mensagem'] = "Email Inválido";
+            header('Location: /login');
             return;
 
         }else {
             $usuario = $this->repositorioDeUsuarios->findOneBy(['email'=>$email]);
 
-            if(is_null($usuario) || !$usuario->senhaEstaCorreta($senha)){
-                echo "E-mail ou senha Inválidos";
+            if(is_null($usuario) || !$usuario->senhaEstaCorreta($senha) || $senha == ''){
+                $_SESSION['tipoMensagem'] = 'danger';
+                $_SESSION['mensagem'] = "E-mail ou senha Inválidos";
+                header('Location: /login');
                 return;
             }
             
