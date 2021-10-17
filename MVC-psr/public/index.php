@@ -1,9 +1,9 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use Alura\Cursos\Controller\InterfaceControladorRequisicao;
 use Nyholm\Psr7\Factory\Psr17Factory;
 use Nyholm\Psr7Server\ServerRequestCreator;
+use Psr\Http\Server\RequestHandlerInterface;
 
 $rotas = require __DIR__ . '/../config/routes.php';
 $caminho = $_SERVER["PATH_INFO"] ?? '/';
@@ -42,7 +42,7 @@ $request = $creator->fromGlobals();
 //caso receba uma rota válida:
 $controllerClass = $rotas[$caminho];
 $controller = new $controllerClass();
-$resposta = $controller->processaRequisicao($request);
+$resposta = $controller->handle($request);
 
 
 //viasualizado os cabeçalhos da resposta
@@ -53,4 +53,10 @@ foreach ($resposta->getHeaders() as $name =>$values){
 }
 
 echo $resposta->getBody();
-exit();
+
+
+/*
+    implementado InterfaceControladorRequisição através da psr-7, substituindo a criada anteriormente.
+    implementado a criação de mensagens http a partir da interface psr-7 utilizando a psr17.
+    implementando a psr-15 ajustando a forma de como lidar com as mensagens http através do RequestHandlerInterface, e o método Handle substituindo o original processaRequisição... 
+*/    
