@@ -41,7 +41,10 @@ $request = $creator->fromGlobals();
 
 //caso receba uma rota válida:
 $controllerClass = $rotas[$caminho];
-$controller = new $controllerClass();
+
+//usando arquivo de config para criar um container que irá retornar a instancia de um controller
+$container = require __DIR__ . '/../config/dependencies.php';
+$controller = $container->get($controllerClass);
 $resposta = $controller->handle($request);
 
 
@@ -59,4 +62,6 @@ echo $resposta->getBody();
     implementado InterfaceControladorRequisição através da psr-7, substituindo a criada anteriormente.
     implementado a criação de mensagens http a partir da interface psr-7 utilizando a psr17.
     implementando a psr-15 ajustando a forma de como lidar com as mensagens http através do RequestHandlerInterface, e o método Handle substituindo o original processaRequisição... 
-*/    
+    implementado psr-11 para container de dependência, pois um Controller pode receber no seu construtor uma dependência para seu funcionamento mas outro pode receber outro tipo, a psr-11 ajuda a realizar dinamicamente a checagem e uso.
+    implementado php-di para realizar uso da psr-11 descrito acima.
+    */    
