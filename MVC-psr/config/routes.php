@@ -1,13 +1,15 @@
 <?php
 
-use Alura\Cursos\Controller\{Exclusao,
-                            FormularioEdicao,
-                            FormularioInsercao,
-                            FormularioLogin,
-                            ListarCursos,
-                            Persistencia,
-                            RealizarLogin,
-                            RealizarLogout};
+use Alura\Cursos\Controller\{CursosEmJson,
+    CursosEmXML,
+    Exclusao,
+    FormularioEdicao,
+    FormularioInsercao,
+    FormularioLogin,
+    ListarCursos,
+    Persistencia,
+    RealizarLogin,
+    RealizarLogout};
 
 $rotas = [
     '/novo-curso' => FormularioInsercao::class,
@@ -18,6 +20,8 @@ $rotas = [
     '/realiza-login' => RealizarLogin::class,
     '/realiza-logout' => RealizarLogout::class,
     '/login' => FormularioLogin::class,
+    '/listaDeCursosJson' => CursosEmJson::class,
+    '/listaDeCursosXML' => CursosEmXML::class
 ];
 
 return $rotas;
