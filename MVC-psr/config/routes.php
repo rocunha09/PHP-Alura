@@ -1,9 +1,23 @@
 <?php
 
-use Alura\Cursos\Controller\FormularioInsercao;
+use Alura\Cursos\Controller\{Exclusao,
+                            FormularioEdicao,
+                            FormularioInsercao,
+                            FormularioLogin,
+                            ListarCursos,
+                            Persistencia,
+                            RealizarLogin,
+                            RealizarLogout};
 
 $rotas = [
-    '/novo-curso' => FormularioInsercao::class
+    '/novo-curso' => FormularioInsercao::class,
+    '/alterar-curso' => FormularioEdicao::class,
+    '/salvar-curso' => Persistencia::class,
+    '/excluir-curso' => Exclusao::class,
+    '/listar-cursos' => ListarCursos::class,
+    '/realiza-login' => RealizarLogin::class,
+    '/realiza-logout' => RealizarLogout::class,
+    '/login' => FormularioLogin::class,
 ];
 
 return $rotas;
