@@ -42,7 +42,7 @@ class SeriesController extends Controller
         ]);
         $request->session()->flash('mensagem', "Série ({$nome}) criada com sucesso!");
 
-        return redirect('/series');
+        return redirect()->route('listar_series');
     }
 
     public function destroy(Request $request)
@@ -50,7 +50,7 @@ class SeriesController extends Controller
         Serie::destroy($request->id);
         $request->session()->flash('mensagem', "Série excluída com sucesso!");
 
-        return redirect('/series');
+        return redirect()->route('listar_series');
     }
 
 }
