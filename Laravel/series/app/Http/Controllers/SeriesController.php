@@ -9,13 +9,17 @@ use Illuminate\Http\Request;
 
 class SeriesController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-            $series = Serie::all();
+        //$series = Serie::all(); //retorna todos as series
 
-           return view('series.index', [
-               'series' => $series
-           ]);
+        $series = Serie::query()->orderBy('nome')->get(); //retorna todas as series ordenadas por nome
+        $mensagem = $request->session()->get('mensagem');
+
+        return view('series.index', [
+           'series' => $series,
+            'mensagem' => $mensagem
+       ]);
 
     }
 
@@ -36,6 +40,10 @@ class SeriesController extends Controller
         Serie::create([
             'nome' => $nome
         ]);
+
+        $request->session()->flash('mensagem', "Série ({$nome}) criada com sucesso!");
+
+        return redirect('/series');
     }
 
 }
