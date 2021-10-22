@@ -5,10 +5,11 @@
 @endsection
 
 @section('conteudo')
-    <form action="/series/salvar" method="post">
+    <form method="post">
+        @csrf
         <div class="form-group">
-            <label for="descricao">Nome:</label>
-            <input type="text" name="descricao" class="form-control">
+            <label for="nome">Nome:</label>
+            <input type="text" name="nome" class="form-control">
             <button class="btn btn-primary mt-2">Salvar</button>
         </div>
     </form>
