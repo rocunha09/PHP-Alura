@@ -3,10 +3,13 @@
 
 namespace App\Http\Controllers;
 
-
-use App\Http\Requests\SeriesFormRequest;
+use App\Episodio;
 use App\serie;
+use App\Temporada;
 use Illuminate\Http\Request;
+use App\Services\CriadorDeSerie;
+use App\Http\Requests\SeriesFormRequest;
+use App\Services\RemovedorDeSerie;
 
 class SeriesController extends Controller
 {
@@ -29,36 +32,23 @@ class SeriesController extends Controller
         return view('series.create');
     }
 
-    public function store(SeriesFormRequest $request)
+    public function store(SeriesFormRequest $request, CriadorDeSerie $criadorDeSerie)
     {
-        $nome = $request->nome;
-        $serie = Serie::create([
-            'nome' => $nome
-        ]);
+        $serie = $criadorDeSerie->criarSerie(
+            $request->nome, 
+            $request->temporadas, 
+            $request->episodios);
 
-        $qtdTemporadas = $request->temporadas;
-        $episodios = $request->episodios;
-        for($i = 1; $i <= $qtdTemporadas; $i++){
-           $temporada =  $serie->temporadas()->create([
-                'numero' => $i
-            ]);
-
-            for($j = 1; $j <= $episodios; $j++){
-                $temporada->episodios()->create([
-                    'numero' => $j
-                ]);
-            }
-        }
-
-        $request->session()->flash('mensagem', "Série ({$nome}) com suas temporadas e episódios criados com sucesso!");
+        $request->session()->flash('mensagem', "Série ({$serie->nome}) com suas temporadas e episódios criados com sucesso!");
 
         return redirect()->route('listar_series');
     }
 
-    public function destroy(Request $request)
+    public function destroy(Request $request, RemovedorDeSerie $removedorDeSerie)
     {
-        Serie::destroy($request->id);
-        $request->session()->flash('mensagem', "Série excluída com sucesso!");
+        $nomeSerie = $removedorDeSerie->removerSerie($request->id);
+
+        $request->session()->flash('mensagem', "Série ($nomeSerie) excluída com sucesso!");
 
         return redirect()->route('listar_series');
     }
