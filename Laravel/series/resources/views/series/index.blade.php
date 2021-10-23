@@ -17,14 +17,17 @@ Lista de Séries
 
     @foreach($series as $serie)
         <li class="list-group-item d-flex justify-content-between align-items-center">{{$serie->nome}}
+            <span class="d-flex">
 
-            <form action="/series/{{$serie->id}}" method="post"  onsubmit="return confirm('Deseja Excluir a série {{addslashes($serie->nome)}}?')">
-                @csrf
-                @method('DELETE')
-                <button class="btn btn-danger btn-sm"> <i class="material-icons">delete_forever</i>
-                </button>
-            </form>
+                <a href="/series/{{$serie->id}}/temporadas" class="btn btn-info btn-sm mr-3"><i class="material-icons">launch</i></a>
 
+                <form action="/series/{{$serie->id}}" method="post"  onsubmit="return confirm('Deseja Excluir a série {{addslashes($serie->nome)}}?')">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-danger btn-sm "> <i class="material-icons">delete_forever</i>
+                    </button>
+                </form>
+            </span>
         </li>
     @endforeach
 

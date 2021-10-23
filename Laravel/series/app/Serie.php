@@ -18,4 +18,13 @@ class serie extends Model
 
     public $timestamps = false; //desta forma o ORM ignora a necessidade deste dado
     protected $fillable = ['nome']; //atributos que são permitidos serem passados pelo método create9ver SeriesCOntroller)
+
+    //uma serie tem várias temporadas e para isso fazemos o relacionamento
+    //para acessar podemos criar um método e ele acessará as temporadas
+    //hasMany indica que podem ser muitas temporadas
+    public function temporadas()
+    {
+        return $this->hasMany(Temporada::class);
+    }
+
 }
