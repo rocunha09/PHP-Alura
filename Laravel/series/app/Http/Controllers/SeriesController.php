@@ -35,8 +35,8 @@ class SeriesController extends Controller
     public function store(SeriesFormRequest $request, CriadorDeSerie $criadorDeSerie)
     {
         $serie = $criadorDeSerie->criarSerie(
-            $request->nome, 
-            $request->temporadas, 
+            $request->nome,
+            $request->temporadas,
             $request->episodios);
 
         $request->session()->flash('mensagem', "Série ({$serie->nome}) com suas temporadas e episódios criados com sucesso!");

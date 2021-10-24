@@ -6,7 +6,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class serie extends Model
+/**
+ * @method static create(string[] $array)
+ */
+class Serie extends Model
 {
     /*
         para saber qual tabela irá representar esta classe no banco podemos
