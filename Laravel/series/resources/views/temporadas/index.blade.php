@@ -12,7 +12,8 @@ Temporadas de <strong>{{$serie->nome}}</strong>
             Temporada {{$temporada->numero}}
             </a>
             <span class="badge badge-secondary">
-                0 / {{$temporada->episodios->count()}}
+                <!--num de ep assistidos por temporada / total de ep por temporada-->
+                {{$numAssistidos[$temporada->numero -1]}} / {{$temporada->episodios->count()}}
             </span>
         </li>
         @endforeach
