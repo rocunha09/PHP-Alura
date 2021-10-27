@@ -13,11 +13,11 @@
 
 
 use Illuminate\Support\Facades\Auth;
-
+/*
 Route::get('/', function () {
     return view('welcome');
 });
-
+*/
 Route::get('/series', 'SeriesController@index')->name('listar_series');
 
 Route::get('/series/criar', 'SeriesController@create')->name('form_criar_serie')->middleware('autenticador');
