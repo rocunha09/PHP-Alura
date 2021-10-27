@@ -23,6 +23,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('entrar'); //alterado para tela de login desenvolvida
     }
 }

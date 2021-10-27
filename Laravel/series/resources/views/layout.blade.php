@@ -22,6 +22,18 @@
     </style>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-2 d-flex justify-content-between">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{{route('listar_series')}}">Series</a>
+        @auth
+        <a href="/sair" class="text-danger">Sair</a>
+        @endauth
+        @guest
+            <a href="/entrar" class="text-info">Entrar</a>
+        @endguest
+    </div>
+</nav>
+
     <div class="container">
         <div class="jumbotron">
             <h1 class="display-4">@yield('cabecalho')</h1>

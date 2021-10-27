@@ -7,8 +7,9 @@ Lista de Séries
 @section('conteudo')
 
 @include('mensagem', ['mensagem' => $mensagem])
-
+@auth
 <a href="{{route('form_criar_serie')}}" class="btn btn-primary mb-2">Adicionar</a>
+@endauth
 <ul class="list-group d-flex">
 
     @foreach($series as $serie)
@@ -16,6 +17,7 @@ Lista de Séries
             <span id="nome-serie-{{ $serie->id }}">{{$serie->nome}}</span>
 
             <!--input hidden para alterar nome da serie-->
+            @auth
             <div class="input-group w-50" hidden id="input-nome-serie-{{ $serie->id }}">
                 <input type="text" class="form-control" value="{{ $serie->nome }}">
                 <div class="input-group-append">
@@ -25,20 +27,23 @@ Lista de Séries
                     </button>
                 </div>
             </div>
+            @endauth
 
             <span class="d-flex">
+                @auth
                 <button class="btn btn-info btn-sm mr-3" id="me-{{ $serie->id }}" onclick="toggleInput({{ $serie->id }})">
                     <i class="material-icons">edit</i>
                 </button>
-
+                @endauth
                 <a href="/series/{{$serie->id}}/temporadas" class="btn btn-info btn-sm mr-3"><i class="material-icons">launch</i></a>
-
+                @auth
                 <form action="/series/{{$serie->id}}" method="post"  onsubmit="return confirm('Deseja Excluir a série {{addslashes($serie->nome)}}?')">
                     @csrf
                     @method('DELETE')
                     <button class="btn btn-danger btn-sm "> <i class="material-icons">delete_forever</i>
                     </button>
                 </form>
+                    @endauth
             </span>
         </li>
     @endforeach

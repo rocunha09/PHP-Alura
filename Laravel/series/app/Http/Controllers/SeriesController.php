@@ -14,11 +14,6 @@ use App\Services\RemovedorDeSerie;
 class SeriesController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function index(Request $request)
     {
         //$series = Serie::all(); //retorna todos as series

@@ -14,7 +14,7 @@ Episódios da Temporada <strong>{{$temporadaNum}}</strong> de <strong>{{$serie}}
         @foreach($episodios as $episodio)
 
         <li class="list-group-item d-flex justify-content-between align-items-center">
-            <span class="form-check-label">Episódio {{$episodio->numero}}}</span>
+            <span class="form-check-label">Episódio {{$episodio->numero}}</span>
             <input class="greatCheck" type="checkbox" name="episodios[]" value="{{$episodio->id}}"
             {{$episodio->assistido ? 'checked' : ''}}>
 
