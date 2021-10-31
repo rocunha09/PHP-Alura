@@ -12,6 +12,7 @@ class Serie extends Model
 
     public $timestamps = false;
     protected $fillable = ['nome'];
+    protected $perPage = 3; //valor padrão da quantidade de itens por página
 
     public function episodios()
     {

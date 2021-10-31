@@ -11,12 +11,7 @@ abstract class BaseController
 
     public function index(Request $request)
     {
-        //calculando offset, ele representa o ponto de partida da listagem
-        $offset = ($request->page -1) * $request->per_page;
-        return $this->classe::query()
-            ->offset($offset) // ponto de partida
-            ->limit($request->per_page) //quantidade de itens por página
-            ->get();
+        return $this->classe::paginate($request->per_page);
     }
 
     public function store(Request $request)
