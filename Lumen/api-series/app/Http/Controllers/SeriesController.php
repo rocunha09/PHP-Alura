@@ -54,20 +54,22 @@ class SeriesController
 
     public function destroy(int $id, Request $request)
     {
-        $serie = Serie::find($id);
+        /*
+         * Para remover uma Serie, foi chamado o método estático destroy, que recebe como parâmetro os IDs dos
+         * registros a serem removidos do banco de dados.
+         *
+         * ele retorna o número de registros afetados
+         * */
+        $qtdSseriesRemovidas = Serie::destroy($id);
 
-        if(is_null($serie)){
+        if($qtdSseriesRemovidas === 0){
             return response()
                 ->json([
-                    'mensagem' =>'Recurso não encontrado'
+                    'erro' =>'Recurso não encontrado'
                 ], 404);
         }
 
-        $serie->delete();
-
         return response()
-            ->json([
-                'mensagem' =>'Serie removida com sucesso!'
-            ], 200);
+            ->json('', 204);
     }
 }
