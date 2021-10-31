@@ -9,9 +9,14 @@ abstract class BaseController
 {
     protected $classe;
 
-    public function index()
+    public function index(Request $request)
     {
-        return $this->classe::all();
+        //calculando offset, ele representa o ponto de partida da listagem
+        $offset = ($request->page -1) * $request->per_page;
+        return $this->classe::query()
+            ->offset($offset) // ponto de partida
+            ->limit($request->per_page) //quantidade de itens por página
+            ->get();
     }
 
     public function store(Request $request)
