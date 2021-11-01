@@ -5,7 +5,7 @@ namespace App\Models;
 
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
+
 
 class Serie extends Model
 {
@@ -19,7 +19,7 @@ class Serie extends Model
         return $this->hasMany(Episodio::class);
     }
 
-    public function getLinksAttribute($links): array
+    public function getLinksAttribute(): array
     {
         return [
             'self' => '/api/series/' . $this->id,

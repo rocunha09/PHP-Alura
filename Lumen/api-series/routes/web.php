@@ -20,7 +20,7 @@ $router->get('/', function () use ($router) {
 //usando rotas dentro de grupos
 
 //grupo /api
-$router->group(['prefix'=> '/api'], function() use ($router){
+$router->group(['prefix'=> '/api', 'middleware' => 'auth'], function() use ($router){
     $router->group(['prefix'=> '/series'], function() use ($router){
         $router->get('/', 'SeriesController@index');
         $router->post('/', 'SeriesController@store');
@@ -38,4 +38,6 @@ $router->group(['prefix'=> '/api'], function() use ($router){
         $router->put('/{id}', 'EpisodiosController@update');
         $router->delete('/{id}', 'EpisodiosController@destroy');
     });
+
 });
+$router->post('/api/login', 'TokenController@gerarToken');
