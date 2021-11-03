@@ -12,7 +12,10 @@
 */
 
 
+use App\Mail\NovaSerie;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 /*
 Route::get('/', function () {
     return view('welcome');
@@ -50,3 +53,5 @@ Route::get('/sair', function(){
     Auth::logout();
     return redirect('/entrar');
 });
+
+

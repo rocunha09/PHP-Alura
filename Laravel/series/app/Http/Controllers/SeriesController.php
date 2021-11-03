@@ -3,13 +3,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Episodio;
+use App\Http\Middleware\Autenticador;
+use App\Mail\NovaSerie;
 use App\serie;
-use App\Temporada;
 use Illuminate\Http\Request;
 use App\Services\CriadorDeSerie;
 use App\Http\Requests\SeriesFormRequest;
 use App\Services\RemovedorDeSerie;
+use Illuminate\Support\Facades\Mail;
 
 class SeriesController extends Controller
 {
@@ -39,6 +40,12 @@ class SeriesController extends Controller
             $request->nome,
             $request->temporadas,
             $request->episodios);
+
+        //envio de email ao cadastrar serie
+        $email = new NovaSerie($request->nome, $request->temporadas, $request->episodios);
+        $email->subject = 'Nova Serie Cadastrada';
+        $user = $request->user();
+        Mail::to($user)->send($email);
 
         $request->session()->flash('mensagem', "Série ({$serie->nome}) com suas temporadas e episódios criados com sucesso!");
 
