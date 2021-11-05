@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Middleware\Autenticador;
 use App\Mail\NovaSerie;
-use App\serie;
+use App\Serie;
 use App\User;
 use Illuminate\Http\Request;
 use App\Services\CriadorDeSerie;
 use App\Http\Requests\SeriesFormRequest;
 use App\Services\RemovedorDeSerie;
 use Illuminate\Support\Facades\Mail;
+use \App\Events\NovaSerieEvent;
 
 class SeriesController extends Controller
 {
@@ -37,21 +38,20 @@ class SeriesController extends Controller
 
     public function store(SeriesFormRequest $request, CriadorDeSerie $criadorDeSerie)
     {
+        //serie
         $serie = $criadorDeSerie->criarSerie(
             $request->nome,
             $request->temporadas,
             $request->episodios);
 
-        //envio de email ao cadastrar serie
-        //envio para todos usuários cadastrados na aplicação
-        $users = User::all();
+        //evento
+        $eventNovaSerie = new NovaSerieEvent(
+            $request->nome,
+            $request->temporadas,
+            $request->episodios
+        );
 
-        foreach ($users as $user){
-            $email = new NovaSerie($request->nome, $request->temporadas, $request->episodios);
-            $email->subject = 'Nova Serie Cadastrada';
-            Mail::to($user)->send($email);
-            sleep(5); //incluindo delay entre envio de cada email para não haver bloqueio de spam
-        }
+        event($eventNovaSerie);
 
         $request->session()->flash('mensagem', "Série ({$serie->nome}) com suas temporadas e episódios criados com sucesso!");
 
