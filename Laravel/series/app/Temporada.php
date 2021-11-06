@@ -27,4 +27,6 @@ class Temporada extends Model
             return $episodio->assistido;
         });
     }
+
+
 }

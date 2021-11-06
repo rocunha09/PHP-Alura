@@ -14,7 +14,12 @@ Lista de Séries
 
     @foreach($series as $serie)
         <li class="list-group-item d-flex justify-content-between align-items-center">
-            <span id="nome-serie-{{ $serie->id }}">{{$serie->nome}}</span>
+            <div>
+                <a href="{{$serie->capa_url}}" target="_blank">
+                    <img id="img-capa" src="{{$serie->capa_url}}" alt="capa-serie" class="img-thumbnail mr-3" height="100px" width="100px">
+                </a>
+                <span id="nome-serie-{{ $serie->id }}">{{$serie->nome}}</span>
+            </div>
 
             <!--input hidden para alterar nome da serie-->
             @auth
@@ -95,9 +100,9 @@ Lista de Séries
                 document.getElementById(`nome-serie-${serieId}`).textContent = nome;
             });
 
-
-
         }
+
     </script>
+
 @endsection
 

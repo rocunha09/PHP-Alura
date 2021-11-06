@@ -28,13 +28,19 @@ class CriadorDeSerie extends Model
         }
     }
 
-    public function criarSerie(string $nomeSerie, int $qtdTemporadas, int $episodios): Serie
-    {
+    public function criarSerie(
+        string $nomeSerie,
+        int $qtdTemporadas,
+        int $episodios,
+        ?string $capa
+    ): Serie {
+
         $serie = null;
 
         DB::beginTransaction();  /* fazendo desta forma simplifica o uso de transaction*/
         $serie = Serie::create([
-            'nome' => $nomeSerie
+            'nome' => $nomeSerie,
+            'capa' => $capa
         ]);
 
         $this->criarTemp($episodios, $qtdTemporadas, $serie);

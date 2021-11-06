@@ -5,6 +5,7 @@ namespace App;
 
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * @method static create(string[] $array)
@@ -20,7 +21,7 @@ class Serie extends Model
     */
 
     public $timestamps = false; //desta forma o ORM ignora a necessidade deste dado
-    protected $fillable = ['nome']; //atributos que são permitidos serem passados pelo método create9ver SeriesCOntroller)
+    protected $fillable = ['nome', 'capa']; //atributos que são permitidos serem passados pelo método create9ver SeriesCOntroller)
 
     //uma serie tem várias temporadas e para isso fazemos o relacionamento
     //para acessar podemos criar um método e ele acessará as temporadas
@@ -29,5 +30,18 @@ class Serie extends Model
     {
         return $this->hasMany(Temporada::class);
     }
+
+    public function getCapaUrlAttribute()
+    {
+        $caminho = null;
+        if(is_null($this->capa)) {
+            //return $caminho = "http://{$_SERVER['HTTP_HOST']}/storage/serie/sem-imagem.jpg";
+            return Storage::url('serie/sem-imagem.jpg');
+        }
+
+        //return $caminho = "http://{$_SERVER['HTTP_HOST']}/storage/{$this->capa}";
+        return Storage::url($this->capa);
+    }
+
 
 }
