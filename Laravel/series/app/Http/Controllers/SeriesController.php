@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\SerieApagada;
 use App\Http\Middleware\Autenticador;
 use App\Mail\NovaSerie;
 use App\Serie;
