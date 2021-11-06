@@ -2,7 +2,7 @@
 
 namespace App\Services;
 use Illuminate\Support\Facades\DB;
-use App\{Episodio, Events\SerieApagada, Serie, Temporada};
+use App\{Episodio, Events\SerieApagada, Jobs\ExcluirCapaSerie, Serie, Temporada};
 use Illuminate\Support\Facades\Storage;
 
 class RemovedorDeSerie
@@ -37,9 +37,12 @@ class RemovedorDeSerie
             $serie->delete();
 
             if(!is_null($capaSerie)){
-
+                //excluindo usando jobs
+                ExcluirCapaSerie::dispatch($capaSerie);
+                /*
                 $apagaCapaStorage = new SerieApagada($capaSerie);
                 event($apagaCapaStorage);
+                */
             }
         });
 
