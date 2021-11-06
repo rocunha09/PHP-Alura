@@ -31,14 +31,14 @@ class RemovedorDeSerie
         DB::transaction(function() use ($idSerie, &$nomeSerie){
             $serie = Serie::find($idSerie);
             $nomeSerie = $serie->nome;
+            $capaSerie = $serie->capa;
             $this->removerTemp($serie);
 
             $serie->delete();
 
-            if(!is_null($serie->capa)){
-                //Storage::delete($serie->capa);
+            if(!is_null($capaSerie)){
 
-                $apagaCapaStorage = new SerieApagada($serie->capa);
+                $apagaCapaStorage = new SerieApagada($capaSerie);
                 event($apagaCapaStorage);
             }
         });

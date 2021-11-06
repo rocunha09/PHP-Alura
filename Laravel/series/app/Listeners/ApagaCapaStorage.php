@@ -7,7 +7,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Storage;
 
-class ApagaCapaStorage
+class ApagaCapaStorage implements ShouldQueue
 {
     /**
      * Create the event listener.
